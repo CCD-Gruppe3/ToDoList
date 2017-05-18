@@ -14,15 +14,15 @@ namespace ToDoList
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			
 
+			var view = new Form1 {Visible = false};
+			
 			var dbProvider = new DbProvider();
 			var handler = new ToDoListHandler(dbProvider);
 
-			var f = new Form1(handler);
-			f.Display();
+			var controller = new Controller.Controller(handler, view);
 
-			Application.Run(f);
+			Application.Run(view);
 		}
 	}
 }

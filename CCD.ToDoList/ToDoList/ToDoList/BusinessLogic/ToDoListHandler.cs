@@ -1,14 +1,11 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ToDoList.Data;
 
 namespace ToDoList.BusinessLogic
 {
-	internal class ToDoListHandler
+	public class ToDoListHandler
 	{
 		private readonly DbProvider provider;
 		private readonly IList<ToDoItem> items;
@@ -18,20 +15,51 @@ namespace ToDoList.BusinessLogic
 		{
 			this.provider = provider;
 			items = provider.Load();
+
+			MoveDoneItemsToArchive();
 		}
 
-		public void Add(string newTitle)
+		public ToDoItem Add(string newTitle)
 		{
 			var newItem = new ToDoItem() {Title = newTitle};
 
 			items.Add(newItem);
 
 			provider.Save(items);
+
+			return newItem;
 		}
 
-		public IEnumerable<ToDoItem> Get()
+		public IEnumerable<ToDoItem> Get(bool showArchive = false)
 		{
-			return items;
+			return items.Where(i => i.IsArchived == showArchive);
+		}
+
+		private void MoveDoneItemsToArchive()
+		{
+			var doneItems = items.Where(i => i.IsDone && i.IsArchived == false && DateTime.Today.Subtract(i.DoneDate).Days >= 1 );
+			
+			if(!doneItems.Any()) return;
+
+			foreach (var toDoItem in doneItems)
+			{
+				toDoItem.IsArchived = true;
+			}
+
+			provider.Save(items);
+
+		}
+
+		public bool SetDone(int index, bool isChecked)
+		{
+			if (items[index].IsDone != isChecked)
+			{
+				items[index].DoneDate = isChecked ? DateTime.Today : DateTime.MaxValue;
+				items[index].IsDone = isChecked;
+				provider.Save(items);
+				return true;
+			}
+			return false;
 		}
 	}
 }

@@ -6,7 +6,7 @@ using ToDoList.Data;
 
 namespace ToDoList
 {
-	class DbProvider
+	public class DbProvider
 	{
 		private readonly string path;
 

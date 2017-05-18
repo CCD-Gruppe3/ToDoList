@@ -98,14 +98,16 @@
 			// archivToolStripMenuItem
 			// 
 			this.archivToolStripMenuItem.Name = "archivToolStripMenuItem";
-			this.archivToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+			this.archivToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.archivToolStripMenuItem.Text = "Aktuell";
+			this.archivToolStripMenuItem.Click += new System.EventHandler(this.archivToolStripMenuItem_Click);
 			// 
 			// aToolStripMenuItem
 			// 
 			this.aToolStripMenuItem.Name = "aToolStripMenuItem";
-			this.aToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+			this.aToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.aToolStripMenuItem.Text = "Archiv";
+			this.aToolStripMenuItem.Click += new System.EventHandler(this.aToolStripMenuItem_Click);
 			// 
 			// panel2
 			// 
@@ -131,6 +133,7 @@
 			this.listView1.TabIndex = 1;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
+			this.listView1.ItemChecked += new System.Windows.Forms.ItemCheckedEventHandler(this.listView1_ItemChecked);
 			// 
 			// colIsDone
 			// 
@@ -178,7 +181,7 @@
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Neue Aufgabe";
 			// 
-			// textBox1
+			// textBoxNewItem
 			// 
 			this.textBoxNewItem.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));

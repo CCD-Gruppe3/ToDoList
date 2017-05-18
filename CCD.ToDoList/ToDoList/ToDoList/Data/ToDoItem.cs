@@ -19,9 +19,17 @@ namespace ToDoList.Data
 			DueDate = dueDate;
 			Url = url;
 			IsDone = isDone;
+			IsArchived = false;
 		}
 
+		public bool IsArchived { get; set; }
+
 		public string Title { get; set; }
+		public override string ToString()
+		{
+			return $"{Title} - {Description} - {IsDone}";
+		}
+
 		public string Description { get; set;}
 		public DateTime DoneDate { get; set;}
 		public DateTime DueDate { get; set;}

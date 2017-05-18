@@ -55,12 +55,22 @@ namespace ToDoList.Tests
 		[Fact(Skip = "explicit")]
 		public void DisplayToDoListitemsTest()
 		{
-			var dbProvider = new DbProvider(Path);
-			var handler = new ToDoListHandler(dbProvider);
-			var f = new Form1(handler);
-			f.Display();
-
+			var f = new Form1();
+			f.SetController(new Controller.Controller(new ToDoListHandler(new DbProvider(Path)), f));
 			f.ShowDialog();
+
+		}
+
+		[Fact]
+		public void TestController()
+		{
+			ToDoMockView mockView = new ToDoMockView();
+
+			var c = new Controller.Controller(new ToDoListHandler(new DbProvider(Path)), mockView);
+
+			c.AddNewItem("Neues Item");
+
+			Assert.True(mockView.List.Any(item => item.Title == "Neues Item"));
 
 		}
 
@@ -105,6 +115,44 @@ namespace ToDoList.Tests
 
 			// Original Zustand herstellen
 			dbProvider.Save(toDos0);
+		}
+	}
+
+	public class ToDoMockView : IToDoForm
+	{
+		private Controller.Controller c;
+		public List<ToDoItem> List;
+
+		public ToDoMockView()
+		{
+			List = new List<ToDoItem>();
+		}
+
+		public bool ShowArchive { get; set; }
+
+		public void Add(ToDoItem lvItem)
+		{
+			List.Add(lvItem);
+		}
+
+		public void Clear()
+		{
+			List.Clear();
+		}
+
+		public void SetController(Controller.Controller controller)
+		{
+			this.c = controller;
+		}
+
+		public void BeginUpdate()
+		{
+			
+		}
+
+		public void EndUpdate()
+		{
+			
 		}
 	}
 }
