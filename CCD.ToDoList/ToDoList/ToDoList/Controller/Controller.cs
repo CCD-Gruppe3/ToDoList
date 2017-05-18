@@ -1,4 +1,4 @@
-//using System.Windows.Forms;
+using System;
 using ToDoList.BusinessLogic;
 
 namespace ToDoList.Controller
@@ -23,24 +23,24 @@ namespace ToDoList.Controller
 
 			foreach (var item in handler.Get(view.ShowArchive))
 			{
-				view.Add(item);
+				view.AddToDoItem(item);
 			}
 
 			view.EndUpdate();
 		}
 		
-		public void AddNewItem(string newTitle)
+		public void AddNewToDoItem(string newTitle)
 		{
 			if (string.IsNullOrEmpty(newTitle))
 				return;
 
-			var item = handler.Add(newTitle);
-			view.Add(item);
+			handler.Add(newTitle);
+			UpdateView();
 		}
 
-		public void UpdateItem(int index, bool isChecked)
+		public void UpdateItem(Guid itemId, bool isChecked)
 		{
-			if (handler.SetDone(index, isChecked))
+			if (handler.SetDone(itemId, isChecked))
 				UpdateView();
 		}
 	}

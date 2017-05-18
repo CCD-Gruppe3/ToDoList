@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.IO;
 using System.Linq;
 using ToDoList.BusinessLogic;
 using ToDoList.Data;
@@ -15,32 +13,33 @@ namespace ToDoList.Tests
 		
 		private IList<ToDoItem> expectedToDoItems = new List<ToDoItem>
 		{
-			new ToDoItem()
-			{
-				Title = "Titel",
-				Description = "Beschreibung",
-				Url = "http://www.google.de",
-				IsDone = false,
-				DueDate = DateTime.Parse("2017-04-18").AddMonths(3),
-				DoneDate = DateTime.Parse("2017-04-18")
-			},
-			new ToDoItem()
-			{
-				Title = "Titel 2",
-				Description = "Beschreibung 2",
-				Url = "http://www.google.de",
-				IsDone = true,
-				DueDate = DateTime.Parse("2017-04-18"),
-				DoneDate = DateTime.Parse("2017-04-18")
-			},
-			new ToDoItem()
-			{
-				Title = "Titel 3",
-				Description = "Beschreibung 3",
-				IsDone = false,
-				DueDate = DateTime.Parse("2017-04-18").AddDays(2),
-				DoneDate = DateTime.Parse("2017-04-18")
-			},
+			new ToDoItem(
+				Guid.Parse("00000000-0000-0000-0000-000000000001"),
+				"Titel",
+				"Beschreibung",
+				DateTime.Parse("2017-04-18"),
+				DateTime.Parse("2017-07-18"),
+				"http://www.google.de",
+				false
+			),
+			new ToDoItem(
+				Guid.Parse("00000000-0000-0000-0000-000000000002"),
+				"Titel 2",
+				"Beschreibung 2",
+				DateTime.Parse("2017-04-18"),
+				DateTime.Parse("2017-04-18"),
+				"http://www.google.de",
+				true
+			),
+			new ToDoItem(
+				Guid.Parse("00000000-0000-0000-0000-000000000003"),
+				"Titel 3",
+				"Beschreibung 3",
+				DateTime.Parse("2017-04-18"),
+				DateTime.Parse("2017-04-20"),
+				null,
+				false
+			)
 		};
 
 		[Fact]
@@ -65,13 +64,16 @@ namespace ToDoList.Tests
 		public void TestController()
 		{
 			ToDoMockView mockView = new ToDoMockView();
+			var todoListHandler = new ToDoListHandler(new DbProvider(Path));
+			var c = new Controller.Controller(todoListHandler, mockView);
 
-			var c = new Controller.Controller(new ToDoListHandler(new DbProvider(Path)), mockView);
+			c.AddNewToDoItem("Neues Item");
 
-			c.AddNewItem("Neues Item");
+			var newItem = mockView.List.SingleOrDefault(item => item.Title == "Neues Item");
+			Assert.NotNull(newItem);
 
-			Assert.True(mockView.List.Any(item => item.Title == "Neues Item"));
-
+			//cleanup;
+			Assert.True(todoListHandler.Delete(newItem.Id));
 		}
 
 		[Fact]
@@ -101,7 +103,7 @@ namespace ToDoList.Tests
 
 			var count0 = toDos0.Count;
 
-			var t = new ToDoItem("Hinzugefügte Aufgabe", "diese Aufgabe wurde über den UnitTest hinzugefügt",
+			var t = new ToDoItem(Guid.NewGuid(), "Hinzugefügte Aufgabe", "diese Aufgabe wurde über den UnitTest hinzugefügt",
 				new DateTime(2017, 04, 30), new DateTime(2017, 04, 30), "www.google.de", false);
 			toDos1.Add(t);
 
@@ -130,7 +132,7 @@ namespace ToDoList.Tests
 
 		public bool ShowArchive { get; set; }
 
-		public void Add(ToDoItem lvItem)
+		public void AddToDoItem(ToDoItem lvItem)
 		{
 			List.Add(lvItem);
 		}

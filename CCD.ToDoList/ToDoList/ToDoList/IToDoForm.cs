@@ -6,7 +6,7 @@ namespace ToDoList
 	{
 		bool ShowArchive { get; set; }
 
-		void Add(ToDoItem lvItem);
+		void AddToDoItem(ToDoItem lvItem);
 
 		void Clear();
 

@@ -1,4 +1,4 @@
-﻿[{"Title":"aufgabe 1","Description":"Beschreibung","DoneDate":"2017-04-18T00:00:00+02:00","DueDate":"2017-07-18T00:00:00+02:00","Url":"http://www.google.de","IsDone":false},
-{"Title":"aufgabe 2","Description":"Beschreibung 2","DoneDate":"2017-04-18T00:00:00+02:00","DueDate":"2017-04-18T00:00:00+02:00","Url":"http://www.google.de","IsDone":true},
-{"Title":"aufgabe 3","Description":"Beschreibung 3","DoneDate":"2017-04-18T00:00:00+02:00","DueDate":"2017-04-20T00:00:00+02:00","Url":null,"IsDone":false},
-{"Title":"aufgabe 7","Description":"Beschreibung 3","DoneDate":"2017-04-18T00:00:00+02:00","DueDate":"2017-04-01T10:53:24+02:00","Url":null,"IsDone":true}]
+﻿[{"Id":"00000000-0000-0000-0000-000000000001", "Title":"aufgabe 1","Description":"Beschreibung","DoneDate":"2017-04-18T00:00:00+02:00","DueDate":"2017-07-18T00:00:00+02:00","Url":"http://www.google.de","IsDone":false},
+{"Id":"00000000-0000-0000-0000-000000000002", "Title":"aufgabe 2","Description":"Beschreibung 2","DoneDate":"2017-04-18T00:00:00+02:00","DueDate":"2017-04-18T00:00:00+02:00","Url":"http://www.google.de","IsDone":true},
+{"Id":"00000000-0000-0000-0000-000000000003", "Title":"aufgabe 3","Description":"Beschreibung 3","DoneDate":"2017-04-18T00:00:00+02:00","DueDate":"2017-04-20T00:00:00+02:00","Url":null,"IsDone":false},
+{"Id":"00000000-0000-0000-0000-000000000007", "Title":"aufgabe 7","Description":"Beschreibung 3","DoneDate":"2017-04-18T00:00:00+02:00","DueDate":"2017-04-01T10:53:24+02:00","Url":null,"IsDone":true}]

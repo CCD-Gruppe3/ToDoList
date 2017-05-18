@@ -30,6 +30,17 @@ namespace ToDoList.BusinessLogic
 			return newItem;
 		}
 
+		public bool Delete(Guid itemId)
+		{
+			var itemToDelete = GetToDoItemById(itemId);
+			if (itemToDelete == null)
+				return false;
+
+			items.Remove(itemToDelete);
+			provider.Save(items);
+			return true;
+		}
+
 		public IEnumerable<ToDoItem> Get(bool showArchive = false)
 		{
 			return items.Where(i => i.IsArchived == showArchive);
@@ -50,16 +61,20 @@ namespace ToDoList.BusinessLogic
 
 		}
 
-		public bool SetDone(int index, bool isChecked)
+		public bool SetDone(Guid itemId, bool isChecked)
 		{
-			if (items[index].IsDone != isChecked)
-			{
-				items[index].DoneDate = isChecked ? DateTime.Today : DateTime.MaxValue;
-				items[index].IsDone = isChecked;
-				provider.Save(items);
-				return true;
-			}
-			return false;
+			var item = GetToDoItemById(itemId);
+			if (item == null || item.IsDone == isChecked) return false;
+			
+			item.DoneDate = isChecked ? DateTime.Today : DateTime.MaxValue;
+			item.IsDone = isChecked;
+			provider.Save(items);
+			return true;
+		}
+
+		private ToDoItem GetToDoItemById(Guid itemId)
+		{
+			return items.SingleOrDefault(i => i.Id.Equals(itemId));
 		}
 	}
 }

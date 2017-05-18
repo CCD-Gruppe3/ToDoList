@@ -34,8 +34,8 @@
 			this.löschenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.archivierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.ansichtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.aktuellToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.archivToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.aToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.panel2 = new System.Windows.Forms.Panel();
 			this.listView1 = new System.Windows.Forms.ListView();
 			this.colIsDone = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -89,25 +89,27 @@
 			// ansichtToolStripMenuItem
 			// 
 			this.ansichtToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivToolStripMenuItem,
-            this.aToolStripMenuItem});
+            this.aktuellToolStripMenuItem,
+            this.archivToolStripMenuItem});
 			this.ansichtToolStripMenuItem.Name = "ansichtToolStripMenuItem";
 			this.ansichtToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
 			this.ansichtToolStripMenuItem.Text = "Ansicht";
 			// 
+			// aktuellToolStripMenuItem
+			// 
+			this.aktuellToolStripMenuItem.Checked = true;
+			this.aktuellToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+			this.aktuellToolStripMenuItem.Name = "aktuellToolStripMenuItem";
+			this.aktuellToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+			this.aktuellToolStripMenuItem.Text = "Aktuell";
+			this.aktuellToolStripMenuItem.Click += new System.EventHandler(this.aktuellToolStripMenuItem_Click);
+			// 
 			// archivToolStripMenuItem
 			// 
 			this.archivToolStripMenuItem.Name = "archivToolStripMenuItem";
-			this.archivToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.archivToolStripMenuItem.Text = "Aktuell";
+			this.archivToolStripMenuItem.Size = new System.Drawing.Size(111, 22);
+			this.archivToolStripMenuItem.Text = "Archiv";
 			this.archivToolStripMenuItem.Click += new System.EventHandler(this.archivToolStripMenuItem_Click);
-			// 
-			// aToolStripMenuItem
-			// 
-			this.aToolStripMenuItem.Name = "aToolStripMenuItem";
-			this.aToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.aToolStripMenuItem.Text = "Archiv";
-			this.aToolStripMenuItem.Click += new System.EventHandler(this.aToolStripMenuItem_Click);
 			// 
 			// panel2
 			// 
@@ -127,6 +129,7 @@
             this.colTitle,
             this.colDoneDate});
 			this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.listView1.FullRowSelect = true;
 			this.listView1.Location = new System.Drawing.Point(0, 0);
 			this.listView1.Name = "listView1";
 			this.listView1.Size = new System.Drawing.Size(354, 404);
@@ -189,6 +192,7 @@
 			this.textBoxNewItem.Name = "textBoxNewItem";
 			this.textBoxNewItem.Size = new System.Drawing.Size(250, 20);
 			this.textBoxNewItem.TabIndex = 0;
+			this.textBoxNewItem.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxNewItem_KeyPress);
 			// 
 			// form1BindingSource1
 			// 
@@ -240,8 +244,8 @@
 		private System.Windows.Forms.ColumnHeader colTitle;
 		private System.Windows.Forms.ColumnHeader colDoneDate;
 		private System.Windows.Forms.ToolStripMenuItem ansichtToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem aktuellToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem archivToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem aToolStripMenuItem;
 	}
 }
 
